@@ -1,21 +1,39 @@
 import PostCard from "@/components/common/PostCard";
 import Header from "@/components/layout/Header";
+import { PostProps } from "@/interfaces";
 
-export default function PostsPage() {
-  const samplePosts = [
-    { title: "First Post", description: "This is the first sample post." },
-    { title: "Second Post", description: "Another example post here." },
-  ];
-
+const Posts: React.FC<PostProps[]> = ({ posts }) => {
+  console.log(posts)
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold mb-6">Posts</h2>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {samplePosts.map((post, index) => (
-          <PostCard key={index} title={post.title} description={post.description} />
-        ))}
-      </div>
+    <div className="flex flex-col h-screen">
+      <Header />
+      <main className="p-4">
+        <div className="flex justify-between">
+        <h1 className=" text-2xl font-semibold">Post Content</h1>
+        <button className="bg-blue-700 px-4 py-2 rounded-full text-white">Add Post</button>
+        </div>
+        <div className="grid grid-cols-3 gap-2 ">
+          {
+            posts?.map(({ title, body, userId, id }: PostProps, key: number) => (
+              <PostCard title={title} body={body} userId={userId} id={id} key={key} />
+            ))
+          }
+        </div>
+      </main>
     </div>
-  );
+  )
 }
+
+
+export async function getStaticProps() {
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts")
+  const posts = await response.json()
+
+  return {
+    props: {
+      posts
+    }
+  }
+}
+
+export default Posts;
