@@ -1,6 +1,16 @@
 import React from "react";
 import UserCard from "@/components/UserCard";
 
+export async function getStaticProps() {("https://jsonplaceholder.typicode.com/users");
+  const users = await response.json();
+
+  return {
+    props: {
+      users,
+    },
+  };
+}
+
 interface User {
   id: number;
   name: string;
@@ -34,6 +44,27 @@ const UsersPage = () => {
           name={user.name}
           email={user.email}
           username={user.username}
+        />
+      ))}
+    </div>
+  );
+};
+
+const PostsPage = () => {
+  const posts: Post[] = [
+    { id: 1, title: "Post One", body: "This is the body of post one." },
+    { id: 2, title: "Post Two", body: "This is the body of post two." },
+  ];
+  return (
+    <div className="max-w-3xl mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-6">Posts</h1>
+
+      {posts.map((post) => (
+        <PostCard
+          key={post.id}
+          title={post.title}
+          body={post.body}
+          userId={post.userId}
         />
       ))}
     </div>
