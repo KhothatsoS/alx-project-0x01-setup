@@ -1,46 +1,46 @@
-import Header from "@/components/layout/Header";
-import UserCard from "@/components/common/UserCard";
-import { UserProps } from "@/types/UserProps";
+import React from "react";
+import UserCard from "@/components/UserCard";
 
-export async function getStaticProps() {
-  const response = await fetch("https://jsonplaceholder.typicode.com/users")
-  const posts = await response.json()
-
-  return {
-    props: {
-      posts
-    }
-  }
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  username: string;
 }
 
-const UsersPage = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/users");
-  const users: UserProps[] = await res.json();
+const UsersPage = () => {
+  const users: User[] = [
+    {
+      id: 1,
+      name: "Leanne Graham",
+      username: "Bret",
+      email: "Sincere@april.biz",
+    },
+    {
+      id: 2,
+      name: "Ervin Howell",
+      username: "Antonette",
+      email: "Shanna@melissa.tv",
+    },
+  ];
 
-export default function UsersPage() {
-  const sampleUsers = ["John Doe", "Jane Smith", "Michael Brown"];
+  return (
+    <div className="max-w-2xl mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-6">Users</h1>
 
-return (
-    <div className="p-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      {users.map((u) => (
-        <UserCard key={u.id} user={u} />
+      {users.map((user) => (
+        <UserCard
+          key={user.id}
+          name={user.name}
+          email={user.email}
+          username={user.username}
+        />
       ))}
     </div>
   );
 };
 
-  return (
-    <div className="max-w-5xl mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold mb-6">Users</h2>
+export default UsersPage;
 
-      <ul className="list-disc pl-6 space-y-2">
-        {sampleUsers.map((user, index) => (
-          <li key={index} className="text-gray-700">
-            {user}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+export default Users;
 
