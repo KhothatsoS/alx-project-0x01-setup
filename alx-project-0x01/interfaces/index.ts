@@ -40,3 +40,36 @@ export interface PostModalProps {
   onClose: () => void;
   onSubmit: (post: PostData) => void;
 }
+
+export interface UserData {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+
+  address: {
+    street: string;
+    suite: string;
+    city: string;
+    zipcode: string;
+    geo: {
+      lat: string;
+      lng: string;
+    };
+  };
+
+  phone: string;
+  website: string;
+
+  company: {
+    name: string;
+    catchPhrase: string;
+    bs: string;
+  };
+}
+
+export interface UserModalProps {
+  user: UserData | null;      // The selected user data
+  isOpen: boolean;            // Whether modal is open or not
+  onClose: () => void;        // Function to close modal
+}
