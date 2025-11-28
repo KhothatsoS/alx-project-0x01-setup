@@ -1,3 +1,5 @@
+import Header from "@/components/layout/Header";
+
 export default function UsersPage() {
   const sampleUsers = ["John Doe", "Jane Smith", "Michael Brown"];
 

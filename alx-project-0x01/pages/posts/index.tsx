@@ -1,4 +1,5 @@
 import PostCard from "@/components/common/PostCard";
+import Header from "@/components/layout/Header";
 
 export default function PostsPage() {
   const samplePosts = [
